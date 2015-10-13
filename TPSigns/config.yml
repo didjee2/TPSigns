@@ -1,0 +1,25 @@
+#-------------------------------------------------------------------------#
+# _____   _____                 /    /                                    #
+#   |    |     /               (___    ___  ___  ___                      #
+#   |    |____/    ---------       )| |   )|   )|___                      #
+#   |    |                      __/ | |__/ |  /  __/                      #
+#   |    |                            __/                                 #
+#                                                                         #
+# TPSigns Version 1.0.                                                    #
+# https://www.spigotmc.org/resources/tpsigns.6935/                        #
+# ------------------------------------------------------------------------#
+
+options:
+  logConsole: true
+  use-cooldown: 5
+  sign-updates: 100
+  ping-interval: 5
+  connect-timeout: 4000
+
+servers:
+  pvp:
+    address: '127.0.0.1:25566'
+    displayname: '&cPVP'
+  survival:
+    address: '127.0.0.1:25564'
+    displayname: '&aSurvival'
