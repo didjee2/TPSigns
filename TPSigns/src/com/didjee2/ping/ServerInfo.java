@@ -193,19 +193,15 @@ public class ServerInfo
 		return result;
 	}
 	
-	public void teleportPlayer(Player player)
-	{
+	public void teleportPlayer(Player player){
 		ByteArrayOutputStream b = new ByteArrayOutputStream();
 		DataOutputStream out = new DataOutputStream(b);
 				
-		try 
-		{
+		try {
 			out.writeUTF("Connect");
 			out.writeUTF(this.name);
-		} 
-		catch (IOException e1) 
-		{
-			TPSigns.getInstance().logConsole(Level.WARNING, player.getName() + ": You'll never see me!");
+		} catch (IOException e1) {
+			TPSigns.getInstance().logConsole(Level.WARNING, "An Exception occured: " + e1.getMessage());
 		}
 		
 		player.sendPluginMessage(TPSigns.getInstance(), "BungeeCord", b.toByteArray());

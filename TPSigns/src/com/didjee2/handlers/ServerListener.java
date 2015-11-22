@@ -71,20 +71,44 @@ public class ServerListener implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBungeeSignUpdate(BungeeSignsUpdateEvent event){
+		List<BlockFace> bflist = new ArrayList<BlockFace>();
+		bflist.add(BlockFace.DOWN);
+		bflist.add(BlockFace.EAST);
+		bflist.add(BlockFace.NORTH);
+		bflist.add(BlockFace.UP);
+		bflist.add(BlockFace.WEST);
+		bflist.add(BlockFace.SOUTH);
 		for(BungeeSign sign : event.getSigns()){
 			HashMap<String, Byte> map = sign.getLayout().getMap();
 			for(String s : map.keySet()){
 				
+				if(s.toLowerCase().contains("online")){
+					if(sign.getServer().isOnline()){
+						Byte b = map.get(s);
+						for(BlockFace bf : bflist){
+							Block block = sign.getLocation().getBlock().getRelative(bf);
+							if(block.getType().equals(Material.STAINED_GLASS) || block.getType().equals(Material.STAINED_CLAY) || block.getType().equals(Material.WOOL) || block.getType().equals(Material.STAINED_GLASS_PANE)){
+								block.setData(b);
+							}
+						}
+					}
+				}
+				
+				if(s.toLowerCase().contains("offline")){
+					if(!sign.getServer().isOnline()){
+						Byte b = map.get(s);
+						for(BlockFace bf : bflist){
+							Block block = sign.getLocation().getBlock().getRelative(bf);
+							if(block.getType().equals(Material.STAINED_GLASS) || block.getType().equals(Material.STAINED_CLAY) || block.getType().equals(Material.WOOL) || block.getType().equals(Material.STAINED_GLASS_PANE)){
+								block.setData(b);
+							}
+						}
+					}
+				}
+				
 				if(sign.getServer().isOnline() && sign.getServer().getMotd() != null && sign.getServer().getMotd().contains(s)){
 					Byte b = map.get(s);
 					
-					List<BlockFace> bflist = new ArrayList<BlockFace>();
-					bflist.add(BlockFace.DOWN);
-					bflist.add(BlockFace.EAST);
-					bflist.add(BlockFace.NORTH);
-					bflist.add(BlockFace.UP);
-					bflist.add(BlockFace.WEST);
-					bflist.add(BlockFace.SOUTH);
 					
 					for(BlockFace bf : bflist){
 						Block block = sign.getLocation().getBlock().getRelative(bf);
